@@ -7,7 +7,7 @@ class Client:
     Base client for interacting with the API.
     """
 
-    def __init__(self, api_key: str, base_url: str = "http://localhost:3001"):
+    def __init__(self, api_key: str, base_url: str = "https://server.beamclone.abhigna.online"):
         if not api_key:
             raise ValueError("API key must be provided.")
         self.api_key = api_key

@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import { PrismaClient } from "./generated/prisma";
+import { PrismaClient } from "../generated/prisma";
 import jwt from "jsonwebtoken";
 import { userAuthentication } from "./middleware";
 import crypto from "crypto";
@@ -87,7 +87,7 @@ app.get("/logout", (req, res) => {
   res.json({ message: "Logged out" });
 });
 
-app.get("/auth/check", (req, res) => {
+app.get("/auth/check", async (req, res) => {
   const token = req.cookies.auth_token;
   if (!token) {
     res.status(401).json({ message: "Not authenticated" });
@@ -95,6 +95,13 @@ app.get("/auth/check", (req, res) => {
   }
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET!);
+    const user = await prisma.user.findUnique({
+      where: { id: (decoded as jwt.JwtPayload).userId },
+    });
+    if (!user) {
+      res.status(401).json({ message: "User does not exist" });
+      return;
+    }
     res.json({ authenticated: true, user: decoded });
   } catch (err) {
     res.status(401).json({ message: "Invalid token" });
@@ -128,9 +135,9 @@ app.get("/apikey", userAuthentication, async (req, res) => {
   res.json({ apikeys: apikeys.map((apikey) => apikey.apikey) });
 });
 
-app.delete("/pod/:dockerContainerId", userAuthentication, async (req, res) => {
+app.delete("/pod/:podName", userAuthentication, async (req, res) => {
   const container = await prisma.pod.findUnique({
-    where: { dockerContainerId: req.params.dockerContainerId },
+    where: { name: req.params.podName },
   });
   if (!container) {
     res
@@ -157,9 +164,7 @@ app.delete("/pod/:dockerContainerId", userAuthentication, async (req, res) => {
   });
   try {
     await axios.delete(
-      `${process.env.MAIN_SERVER_BASE_URL!}/pod/${
-        req.params.dockerContainerId
-      }`,
+      `${process.env.MAIN_SERVER_BASE_URL!}/pod/${req.params.podName}`,
       {
         headers: {
           Authorization: `Bearer ${apiKey?.apiKeys[0].apikey}`,

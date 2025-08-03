@@ -8,6 +8,8 @@ def getCurrentDirectory():
     import os
     current_directory = os.getcwd()
     print("Hello from inside the function.")
+    print("ls:")
+    print(os.listdir())
     print(f"Current Working Directory: {current_directory}")
     return current_directory
 

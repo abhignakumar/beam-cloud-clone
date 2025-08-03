@@ -3,7 +3,7 @@ export interface Container {
   createdAt: Date;
   updatedAt: Date;
   userId: string;
-  dockerContainerId: string;
+  name: string;
   image: string;
   url: string;
   status: "RUNNING" | "STOPPED";

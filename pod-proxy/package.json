@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "pod-proxy",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -19,11 +19,9 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
-    "@kubernetes/client-node": "^1.3.0",
     "@prisma/client": "6.13.0",
-    "axios": "^1.11.0",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
-    "zod": "^4.0.13"
+    "http-proxy-middleware": "^3.0.5"
   }
 }

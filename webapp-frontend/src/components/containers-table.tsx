@@ -39,10 +39,10 @@ export function ContainersTable() {
     }
   }
 
-  async function handleStopContainer(dockerContainerId: string) {
+  async function handleStopContainer(podName: string) {
     setStopContainerLoading(true);
     try {
-      await axios.delete(`${BACKEND_BASE_URL}/pod/${dockerContainerId}`, {
+      await axios.delete(`${BACKEND_BASE_URL}/pod/${podName}`, {
         withCredentials: true,
       });
       fetchData();
@@ -93,7 +93,7 @@ export function ContainersTable() {
           containers.map((c) => (
             <TableRow key={c.id}>
               <TableCell>{new Date(c.createdAt).toLocaleString()}</TableCell>
-              <TableCell>{c.dockerContainerId}</TableCell>
+              <TableCell>{c.name}</TableCell>
               <TableCell>{c.image}</TableCell>
               <TableCell>{c.url}</TableCell>
               <TableCell>
@@ -114,7 +114,7 @@ export function ContainersTable() {
                     <Button
                       variant={"destructive"}
                       size={"icon"}
-                      onClick={() => handleStopContainer(c.dockerContainerId)}
+                      onClick={() => handleStopContainer(c.name)}
                       disabled={c.status === "STOPPED" || stopContainerLoading}
                     >
                       <OctagonX />

@@ -18,7 +18,10 @@ export default function LandingPage() {
           <Link to={"/login"}>
             <Button size={"lg"}>Get Started</Button>
           </Link>
-          <Link to={"/https://github.com/abhignakumar"}>
+          <Link
+            to={"https://github.com/abhignakumar/beam-cloud-clone"}
+            target="_blank"
+          >
             <Button size={"lg"} variant={"secondary"}>
               <Github />
               View on GitHub
