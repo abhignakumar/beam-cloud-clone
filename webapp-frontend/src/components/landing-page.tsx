@@ -1,8 +1,27 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Github } from "lucide-react";
+import { Copy, Github } from "lucide-react";
+import { useRef } from "react";
+import { toast } from "sonner";
 
 export default function LandingPage() {
+  const podCodeRef = useRef<HTMLElement>(null);
+  const functionCodeRef = useRef<HTMLElement>(null);
+
+  const copyToClipboard = (ref: React.RefObject<HTMLElement | null>) => {
+    if (ref.current) {
+      const code = ref.current.innerText;
+      navigator.clipboard
+        .writeText(code)
+        .then(() => {
+          toast.success("Copied to Clipboard");
+        })
+        .catch(() => {
+          toast.error("Failed to copy");
+        });
+    }
+  };
+
   return (
     <div className="flex-1 font-sans px-6 py-16">
       <div className="max-w-6xl mx-auto text-center">
@@ -22,7 +41,7 @@ export default function LandingPage() {
             to={"https://github.com/abhignakumar/beam-cloud-clone"}
             target="_blank"
           >
-            <Button size={"lg"} variant={"secondary"}>
+            <Button size={"lg"} variant={"outline"}>
               <Github />
               View on GitHub
             </Button>
@@ -33,9 +52,9 @@ export default function LandingPage() {
       {/* Preview or Code Demo */}
       <div className="mt-20 max-w-5xl mx-auto bg-card text-card-foreground rounded-lg p-6 shadow-lg border">
         <p className="text-lg mb-4 text-left font-medium">Container Example</p>
-        <div className="bg-muted text-muted-foreground font-mono text-sm rounded p-4 overflow-auto">
-          <pre>
-            <code>
+        <div className="bg-muted font-mono text-sm rounded p-4 overflow-auto">
+          <pre className="flex flex-col sm:flex-row">
+            <code className="w-full" ref={podCodeRef}>
               {`from sdk import Client
 from sdk.pod import Pod
 client = Client(api_key="YOUR_API_KEY")
@@ -47,15 +66,23 @@ response = pod.create()
 print(response)
 `}
             </code>
+            <Button
+              size={"icon"}
+              variant={"outline"}
+              onClick={() => copyToClipboard(podCodeRef)}
+              className="mt-2 sm:mt-0"
+            >
+              <Copy />
+            </Button>
           </pre>
         </div>
       </div>
 
       <div className="mt-10 max-w-5xl mx-auto bg-card text-card-foreground rounded-lg p-8 shadow-lg border">
         <p className="text-lg mb-4 text-left font-medium">Function Example</p>
-        <div className="bg-muted text-muted-foreground font-mono text-sm rounded p-4 overflow-auto">
-          <pre>
-            <code>
+        <div className="bg-muted font-mono text-sm rounded p-4 overflow-auto">
+          <pre className="flex flex-col sm:flex-row">
+            <code className="w-full" ref={functionCodeRef}>
               {`from sdk import Client
 from sdk.function import function
 
@@ -75,6 +102,14 @@ if(res['success']):
 else:
     print(res['message'])`}
             </code>
+            <Button
+              size={"icon"}
+              variant={"outline"}
+              onClick={() => copyToClipboard(functionCodeRef)}
+              className="mt-2 sm:mt-0"
+            >
+              <Copy />
+            </Button>
           </pre>
         </div>
       </div>

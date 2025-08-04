@@ -44,7 +44,7 @@ A Python SDK that enables developers to:
 
 ![System Design](assets/system-design-1.png)
 
-#### After Deploying All The Services In The Kubernestes Cluster
+#### After Deploying All The Services In The Kubernetes Cluster
 
 ![System Design](assets/system-design-2.png)
 

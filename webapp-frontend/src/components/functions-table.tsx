@@ -90,7 +90,7 @@ export function FunctionsTable() {
                         View Full Log
                       </Button>
                     </DialogTrigger>
-                    <DialogContent className="min-w-[800px] max-w-[800px] max-h-[80vh]">
+                    <DialogContent className="lg:min-w-[800px] max-h-[80vh]">
                       <DialogHeader>
                         <DialogTitle className="text-lg">
                           Logs: {f.name}

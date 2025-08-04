@@ -1,4 +1,4 @@
-import { SatelliteDish } from "lucide-react";
+import { LogOut, SatelliteDish } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
@@ -53,7 +53,10 @@ export function NavBar() {
       </div>
       <div className="flex items-center gap-x-3">
         {isAuthenticated ? (
-          <Button onClick={handleLogout}>Logout</Button>
+          <Button onClick={handleLogout}>
+            <LogOut />
+            Logout
+          </Button>
         ) : (
           <>
             <Link to={"/signup"}>

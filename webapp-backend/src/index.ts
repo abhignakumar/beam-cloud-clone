@@ -177,6 +177,15 @@ app.delete("/pod/:podName", userAuthentication, async (req, res) => {
   }
 });
 
+app.get("/sdk/python", (req, res) => {
+  res.download("./sdk.zip", "sdk.zip", (err) => {
+    if (err) {
+      console.error("Download error:", err);
+      res.status(500).send("Failed to download the file.");
+    }
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT} ...`);
 });

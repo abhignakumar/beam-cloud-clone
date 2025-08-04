@@ -37,7 +37,7 @@ export function ApiKeyCard() {
   }, []);
 
   return (
-    <Card className="w-full lg:w-1/2">
+    <Card className="w-full">
       <CardHeader>
         <CardTitle>API Keys</CardTitle>
         <CardDescription>

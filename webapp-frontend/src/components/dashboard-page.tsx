@@ -6,6 +6,7 @@ import { ContainersCard } from "@/components/containers-card";
 import { FunctionsCard } from "@/components/functions-card";
 import { Loader } from "lucide-react";
 import { BACKEND_BASE_URL } from "@/lib/config";
+import { SDKCard } from "@/components/sdk-card";
 
 export default function DashboardPage() {
   const navigate = useNavigate();
@@ -35,8 +36,9 @@ export default function DashboardPage() {
 
   return (
     <div className="flex-1 px-7 py-8 space-y-5">
-      <div>
+      <div className="flex flex-col gap-y-4 lg:flex-row lg:gap-x-4">
         <ApiKeyCard />
+        <SDKCard />
       </div>
       <div>
         <ContainersCard />
