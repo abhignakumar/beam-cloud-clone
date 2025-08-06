@@ -2,7 +2,8 @@
 
 A full-stack, container-based serverless platform inspired by [Beam.cloud](https://www.beam.cloud/). This clone enables developers to run python functions in containers and also deploy any container using any image present on Docker Hub. The platform supports user authentication, API key generation, and HTTP routing to user containers using Kubernetes, Nginx Ingress, and HTTPS.
 
-- [Live Demo](https://beamclone.abhigna.online)
+- [Try it out](https://beamclone.abhigna.online)
+- [Video Demo](https://drive.google.com/file/d/1_DXQNVYFgpp9q1ywRz7NFkeno8KbIZV7/view?usp=sharing)
 
 ## 🧱 Architecture Overview
 
